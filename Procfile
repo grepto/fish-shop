@@ -1,0 +1,1 @@
+fish-shop: python3 main.py
