@@ -44,20 +44,6 @@ def start(bot, update):
     return 'HANDLE_MENU'
 
 
-def echo(bot, update):
-    users_reply = update.message.text
-    update.message.reply_text(users_reply)
-    return "ECHO"
-
-
-def button(bot, update):
-    query = update.callback_query
-
-    bot.edit_message_text(text="Selected option: {}".format(query.data),
-                          chat_id=query.message.chat_id,
-                          message_id=query.message.message_id)
-
-
 def handle_menu(bot, update):
     query = update.callback_query
     button = query.data
