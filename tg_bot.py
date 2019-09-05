@@ -195,7 +195,7 @@ def checkout(bot, update):
         update.message.reply_text(f'Номер вашего заказа {update.message.chat_id}')
         return 'START'
     else:
-        update.message.reply_text(f'Ошибка в авдресе электронной почты. Отправьте еще раз')
+        update.message.reply_text(f'Ошибка в адресе электронной почты. Отправьте еще раз')
         logger.debug(f'Wrong email received')
         return 'WAITING_EMAIL'
 
