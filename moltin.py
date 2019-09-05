@@ -1,5 +1,6 @@
 import os
 import logging
+from datetime import datetime
 
 from dotenv import load_dotenv
 import requests
@@ -12,20 +13,27 @@ MOLTIN_API_VERSION = 'v2'
 
 logger = logging.getLogger('moltin')
 
+_token = None
+_token_expires = None
 
 def get_token():
-    data = {
-        'client_id': MOLTIN_CLIENT_ID,
-        'client_secret': MOLTIN_SECRET,
-        'grant_type': 'client_credentials'
-    }
-
-    response = requests.post(f'{MOLTIN_ENDPOINT}/oauth/access_token', data=data)
-    logger.debug(response.json())
-
-    response.raise_for_status()
-
-    return f'{response.json()["token_type"]} {response.json()["access_token"]}'
+    """
+    Возвращает токен к moltin, либо создаёт новый, если он истек или еще не создан.
+    """
+    global _token, _token_expires
+    if not _token or _token_expires <= int(datetime.utcnow().timestamp()):
+        data = {
+            'client_id': MOLTIN_CLIENT_ID,
+            'client_secret': MOLTIN_SECRET,
+            'grant_type': 'client_credentials'
+        }
+        response = requests.post(f'{MOLTIN_ENDPOINT}/oauth/access_token', data=data)
+        logger.debug(response.json())
+        print(response.json())
+        response.raise_for_status()
+        _token = f'{response.json()["token_type"]} {response.json()["access_token"]}'
+        _token_expires = response.json()['expires']
+    return _token
 
 
 def get_products():
