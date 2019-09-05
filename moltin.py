@@ -207,22 +207,7 @@ def add_customer(name, email):
 
 
 def main():
-    products = get_products()
-    # print(products)
-    selected_product = products[0]
-    customer_id = '112812571'
-    # print(selected_product['id'])
-    # product = get_product(selected_product['id'])
-    # print(get_product_image_url(product['image_id']))
-
-    # delete_cart(customer_id)
-    # add_product_to_cart(customer_id, selected_product['id'], 5)
-    # print(get_cart(customer_id))
-    # remove_cart_item(customer_id, 'f619db5d-762c-4411-97e7-ddc6d518e494')
-    # print()
-    # print(get_cart(customer_id))
-    print(add_customer('sasha', '123olo@tr3lo111.lo'))
-    # print(get_customer(email='ololo@trolo121.lo'))
+    pass
 
 
 if __name__ == '__main__':
