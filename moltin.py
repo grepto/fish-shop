@@ -29,7 +29,6 @@ def get_token():
         }
         response = requests.post(f'{MOLTIN_ENDPOINT}/oauth/access_token', data=data)
         logger.debug(response.json())
-        print(response.json())
         response.raise_for_status()
         _token = f'{response.json()["token_type"]} {response.json()["access_token"]}'
         _token_expires = response.json()['expires']
