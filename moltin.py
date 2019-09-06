@@ -15,6 +15,7 @@ logger = logging.getLogger('moltin')
 
 _token = None
 _token_expires = None
+TOKEN_EXPIRES_TIMESHIFT = 10
 
 def get_token():
     """
@@ -31,7 +32,7 @@ def get_token():
         logger.debug(response.json())
         response.raise_for_status()
         _token = f'{response.json()["token_type"]} {response.json()["access_token"]}'
-        _token_expires = response.json()['expires']
+        _token_expires = response.json()['expires'] - TOKEN_EXPIRES_TIMESHIFT
     return _token
 
 
